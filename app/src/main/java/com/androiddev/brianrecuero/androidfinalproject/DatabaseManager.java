@@ -60,6 +60,17 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL( sqlInsert ); // inserts username, email, password
         db.close( );
     }
+    public void modifyAccount( int id, String username, String password, String email ) {
+        SQLiteDatabase db = this.getWritableDatabase( );
+        String sqlUpdate = "update " + TABLE_ACCOUNTS;
+        sqlUpdate += " set " + USER_NAME + " = '" + username + "', ";
+        sqlUpdate += " set " + USER_PASSWORD + " = '" + password + "', ";
+        sqlUpdate += " set " + USER_EMAIL + " = '" + email + "'";
+        sqlUpdate += " where " + USER_ID + " = " + id;
+
+        db.execSQL( sqlUpdate ); // updates username, email, password
+        db.close( );
+    }
     public void addStatistics(){
         Statistics stats = new Statistics();
         SQLiteDatabase db = this.getWritableDatabase( );
